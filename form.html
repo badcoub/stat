@@ -15,3 +15,4 @@ $msg = "Имя: ".$_GET["name"]."\n";$msg .= "Сообщение: ".$_GET["msg"]
 mail($to, $subject, $msg, $headerss);
 print "<script>alert(\"Сообщение успешно отправлено!\");window.location = window.location.href</script>";
 }
+?>
