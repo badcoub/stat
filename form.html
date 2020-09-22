@@ -13,6 +13,6 @@ $headerss.="MIME-Version: 1.0\r\n";
 $headerss.="Date: ".date('D, d M Y h:i:s O')."\r\n";
 $msg = "Имя: ".$_GET["name"]."\n";$msg .= "Сообщение: ".$_GET["msg"]."\n";
 mail($to, $subject, $msg, $headerss);
-print "<script>alert(\"Сообщение успешно отправлено!\");window.location = window.location.href</script>";
+print "<script type="text/javascript">alert(\"Сообщение успешно отправлено!\");window.location = window.location.href</script>";
 }
 ?>
