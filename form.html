@@ -1,42 +1,17 @@
-<html>
-<head>
-<title>Форма заявки с сайта</title>
-</head>
-<body>
-<?php
-//проверяем, существуют ли переменные в массиве POST
-if(!isset($_POST['fio']) and !isset($_POST['email'])){
- ?> <form action="send.php" method="post">
-<input type="text" name="fio" placeholder="Укажите ФИО" required>
-<input type="text" name="email" placeholder="Укажите e-mail" required>
-<input type="submit" value="Отправить">
-</form> <?php
-} else {
- //показываем форму
- $fio = $_POST['fio'];
- $email = $_POST['email'];
- $fio = htmlspecialchars($fio);
- $email = htmlspecialchars($email);
- $fio = urldecode($fio);
- $email = urldecode($email);
- $fio = trim($fio);
- $email = trim($email);
- if (mail("alextatarinov95@gmail.com", "Заявка с сайта", "ФИО:".$fio.". E-mail: ".$email ,"From: example2@mail.ru \r\n")){ 
- echo "Сообщение успешно отправлено";
- } else { 
- echo "При отправке сообщения возникли ошибки";
- }
-}
-?>
-</body>
-</html>
-server {
-listen 80;
-server_name localhost;
-location / {
-root html;
-index index.html index.htm;
-}
-error_page 405 =200 $uri;
-# ...
+<form action="" method="post">
+<input type="text" name="name" placeholder="Имя">
+<textarea name="msg" placeholder="Сообщение"></textarea>
+<input type="submit" name="otprav" value="Отправить">
+</form>
+
+<?php if (isset($_POST["otprav"])) {
+$to = "alextatarinov95@gmail.com";
+$subject = "Письмо с сайта";
+$charset = "utf-8";
+$headerss ="Content-type: text/html; charset=$charset\r\n";
+$headerss.="MIME-Version: 1.0\r\n";
+$headerss.="Date: ".date('D, d M Y h:i:s O')."\r\n";
+$msg = "Имя: ".$_POST["name"]."\n";$msg .= "Сообщение: ".$_POST["msg"]."\n";
+mail($to, $subject, $msg, $headerss);
+print "<script>alert(\"Сообщение успешно отправлено!\");window.location = window.location.href</script>";
 }
